@@ -19,6 +19,7 @@ class Pulse(object):
 	def __init__(self, video_link):
 		self.streamLoop = True
 		self.var_emotions = ["", "", "", "", "", "", ""]
+		self.emotions_list = ['Anger', 'disgust', 'Fear', 'Joy', 'Sadness', 'Surprise', 'Indifferent']
 		self.camera = Camera(camera=video_link)
 		if not self.camera.valid:
 			raise ValueError("ERROR!")
@@ -195,9 +196,8 @@ class Pulse(object):
 	# root.update()
 
 def initiate_analysis_process(video_link):
-	print("Video Link")
-	print(video_link)
 	p = Pulse(video_link)
 	while p.streamLoop:
 		p.loop()
-	return p.var_emotions
+	response_data = {p.emotions_list[i]: p.var_emotions[i] for i in range(len(p.emotions_list))}
+	return response_data
