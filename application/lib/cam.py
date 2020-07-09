@@ -22,6 +22,7 @@ class Camera(object):
             col = (0, 256, 256)
             cv2.putText(frame, "(Error: Camera not accessible)",
                         (65, 220), cv2.FONT_HERSHEY_PLAIN, 2, col)
+        frame = cv2.rotate(frame, cv2.ROTATE_90_COUNTERCLOCKWISE)
         return frame
 
     def release(self):
